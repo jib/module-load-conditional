@@ -1,0 +1,5 @@
+Changes for 0.12    Sun Aug 13 14:55:54 CEST 2006
+=================================================
+* Make %INC look ups work correctly under win32,
+  where the directory seperator is not the same
+  as the %INC path seperator
