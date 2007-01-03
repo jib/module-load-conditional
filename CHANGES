@@ -1,3 +1,8 @@
+Changes for 0.14    Wed Jan  3 18:27:36 CET 2007
+=================================================
+* Skip $VERSION declarations that are part of the 
+  POD as reported in #24062
+
 Changes for 0.12    Sun Aug 13 14:55:54 CEST 2006
 =================================================
 * Make %INC look ups work correctly under win32,

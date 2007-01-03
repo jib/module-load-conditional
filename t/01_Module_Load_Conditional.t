@@ -16,7 +16,7 @@ use strict;
 use lib qw[../lib to_load];
 use File::Spec ();
 
-use Test::More tests => 20;
+use Test::More tests => 23;
 
 ### case 1 ###
 use_ok( 'Module::Load::Conditional' ) or diag "Module.pm not found.  Dying", die;
@@ -78,7 +78,14 @@ use_ok( 'Module::Load::Conditional' ) or diag "Module.pm not found.  Dying", die
 
 }
 
-### test $FILE_VERSION
+### test finding a version of a module that mentions $VERSION in pod
+{   my $rv = check_install( module => 'InPod' );
+    ok( $rv,                        'Testing $VERSION in POD' );
+    ok( $rv->{version},             "   Version found" );
+    is( $rv->{version}, 2,          "   Version is correct" );
+}
+
+### test $FIND_VERSION
 {   local $Module::Load::Conditional::FIND_VERSION = 0;
     local $Module::Load::Conditional::FIND_VERSION = 0;
     
