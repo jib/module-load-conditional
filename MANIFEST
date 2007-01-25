@@ -1,9 +1,10 @@
 CHANGES
 lib/Module/Load/Conditional.pm
 Makefile.PL
-MANIFEST
+MANIFEST			This list of files
 README
 t/01_Module_Load_Conditional.t
+t/02_Parse_Version.t
 t/to_load/Commented.pm
 t/to_load/InPod.pm
 t/to_load/LoadIt.pm

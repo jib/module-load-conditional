@@ -9,6 +9,10 @@ WriteMakefile (
                             'Params::Check'             => 0,
                             'Module::Load'              => 0,
                             'Locale::Maketext::Simple'  => 0,
+                            ### XXX version.pm 0.69 pure perl fails 
+                            ### tests under 5.6.2. XS version is OK
+                            ### see t/02_Parse_Version.t for details
+                            'version'                   => '0.69',
                     },
     AUTHOR          => 'Jos Boumans <kane[at]cpan.org>',
 	ABSTRACT        => 'Simple caller() trace'
