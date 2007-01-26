@@ -14,6 +14,7 @@ WriteMakefile (
                             ### see t/02_Parse_Version.t for details
                             'version'                   => '0.69',
                     },
+    INSTALLDIRS     => ( $] >= 5.009005 ? 'perl' : 'site' ),
     AUTHOR          => 'Jos Boumans <kane[at]cpan.org>',
 	ABSTRACT        => 'Simple caller() trace'
 ); 
