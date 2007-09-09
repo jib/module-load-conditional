@@ -1,3 +1,9 @@
+Changes for 0.17_01 Sun Sep  9 11:55:54 CEST 2007
+=================================================
+* Most VMS specifics can now be removed from the
+  test suite, as we now depend on a newer version
+  of Module::Load, which will hide this all away.
+
 Changes for 0.16    Thu Jan 25 22:24:36 CET 2007
 =================================================
 * Address #23995: Version parsing code has been

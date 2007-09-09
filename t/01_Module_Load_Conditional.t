@@ -1,14 +1,15 @@
 ### Module::Load::Conditional test suite ###
-BEGIN { 
-    if( $ENV{PERL_CORE} ) {
-        chdir '../lib/Module/Load/Conditional' 
-            if -d '../lib/Module/Load/Conditional';
-        unshift @INC, '../../../..';
-    
-        ### fix perl location too
-        $^X = '../../../../../t/' . $^X;
-    }
-} 
+### this should no longer be needed
+# BEGIN { 
+#     if( $ENV{PERL_CORE} ) {
+#         chdir '../lib/Module/Load/Conditional' 
+#             if -d '../lib/Module/Load/Conditional';
+#         unshift @INC, '../../../..';
+#     
+#         ### fix perl location too
+#         $^X = '../../../../../t/' . $^X;
+#     }
+# } 
 
 BEGIN { chdir 't' if -d 't' }
 
@@ -16,7 +17,9 @@ use strict;
 use lib qw[../lib to_load];
 use File::Spec ();
 
-use Test::More tests => 23;
+use Test::More tests    => 23;
+
+use constant ON_VMS     => $^O eq 'VMS';
 
 ### case 1 ###
 use_ok( 'Module::Load::Conditional' );
@@ -40,29 +43,33 @@ use_ok( 'Module::Load::Conditional' );
                 );
 
     ok( $rv->{uptodate},    q[Verify self] );
-    ok( $rv->{version} == $Module::Load::Conditional::VERSION,  
+    is( $rv->{version}, $Module::Load::Conditional::VERSION,  
                             q[  Found proper version] );
 
-    # This test is expecting the file to in UNIX format, so force
-    $rv->{file} = VMS::Filespec::unixify($rv->{file}) if $^O eq 'VMS';
+    ### This test is expecting the file to in UNIX format, so force
+    ### XXX no longer needed with M::Load 0.11_01
+    #$rv->{file} = VMS::Filespec::unixify($rv->{file}) if $^O eq 'VMS';
 
-    # break up the specification
-    my @rv_path;
-    if ($^O eq 'VMS') {
-        # Use the UNIX specific method, as the VMS one currently
-        # converts the file spec back to VMS format.
-        @rv_path = File::Spec::Unix->splitpath($rv->{file});
-    } else {
-        @rv_path = File::Spec->splitpath($rv->{file});
-    }
+    ### break up the specification
+    my @rv_path = do {
+
+        ### Use the UNIX specific method, as the VMS one currently
+        ### converts the file spec back to VMS format.
+        my $class = ON_VMS ? 'File::Spec::Unix' : 'File::Spec';
+        
+        my($vol, $path, $file) = $class->splitpath( $rv->{'file'} );
+
+        my @path = ($vol, File::Spec->splitdir( $path ), $file );
+
+        ### First element could be blank for some system types like VMS
+        shift @path if $vol eq '';
+
+        ### and return it    
+        @path;
+    };
     
-    @rv_path = ($rv_path[0], File::Spec->splitdir($rv_path[1]), $rv_path[2]);
-
-    # First element could be blank for some system types like VMS
-    shift @rv_path if $rv_path[0] eq '';
-
-    ok( $INC{'Module/Load/Conditional.pm'} eq
-        File::Spec::Unix->catfile(@rv_path),
+    is( $INC{'Module/Load/Conditional.pm'},            
+            File::Spec::Unix->catfile(@rv_path),
                             q[  Found proper file]
     );
 
@@ -170,7 +177,9 @@ SKIP:{
     {   package A::B::C::D; 
         $A::B::C::D::VERSION = $$; 
         $INC{'A/B/C/D.pm'}   = $$.$$;
-       $INC{'[.A.B.C]D.pm'} = $$.$$ if $^O eq 'VMS';
+        
+        ### XXX this is no longer needed with M::Load 0.11_01
+        #$INC{'[.A.B.C]D.pm'} = $$.$$ if $^O eq 'VMS';
     }
     
     my $href = check_install( module => 'A::B::C::D', version => 0 );
