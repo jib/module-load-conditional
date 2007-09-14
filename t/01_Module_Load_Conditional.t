@@ -119,8 +119,7 @@ use_ok( 'Module::Load::Conditional' );
                     module  => 'Module::Load::Conditional', 
                     version => $test_ver,
                 );
-use Data::Dumper;
-warn Dumper $rv;
+
     ok( $rv,                "Checking beta versions" );
     ok( !$rv->{'uptodate'}, "   Beta version is higher" );
     

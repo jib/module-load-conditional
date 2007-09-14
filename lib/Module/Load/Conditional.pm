@@ -276,7 +276,12 @@ sub check_install {
     } else {
         ### don't warn about the 'not numeric' stuff ###
         local $^W;
-        $href->{uptodate} = $args->{version} <= $href->{version} ? 1 : 0;
+        
+        ### use qv(), as it will deal with developer release number
+        ### ie ones containing _ as well. This addresses bug report
+        ### #29348: Version compare logic doesn't handle alphas?
+        $href->{uptodate} = 
+            qv( $args->{version} ) <= qv( $href->{version} ) ? 1 : 0;
     }
 
     return $href;
@@ -417,9 +422,13 @@ sub can_load {
             ### else, check if the hash key is defined already,
             ### meaning $mod => 0,
             ### indicating UNSUCCESSFUL prior attempt of usage
+
+            ### use qv(), as it will deal with developer release number
+            ### ie ones containing _ as well. This addresses bug report
+            ### #29348: Version compare logic doesn't handle alphas?
             if (    !$args->{nocache}
                     && defined $CACHE->{$mod}->{usable}
-                    && (($CACHE->{$mod}->{version}||0) >= $href->{$mod})
+                    && (qv($CACHE->{$mod}->{version}||0) >= qv($href->{$mod}))
             ) {
                 $error = loc( q[Already tried to use '%1', which was unsuccessful], $mod);
                 last BLOCK;
