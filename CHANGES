@@ -1,3 +1,10 @@
+Changes for 0.17_02 Fri Sep 14 11:55:52 CEST 2007
+=================================================
+* Some more VMS fixes as suggested by John Malmberg
+* Address #29348: Version compare logic doesn't 
+  handle alphas? by always using qv() to compare
+  version strings.
+
 Changes for 0.17_01 Sun Sep  9 11:55:54 CEST 2007
 =================================================
 * Most VMS specifics can now be removed from the
