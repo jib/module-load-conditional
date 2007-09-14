@@ -46,10 +46,6 @@ use_ok( 'Module::Load::Conditional' );
     is( $rv->{version}, $Module::Load::Conditional::VERSION,  
                             q[  Found proper version] );
 
-    ### This test is expecting the file to in UNIX format, so force
-    ### XXX no longer needed with M::Load 0.11_01
-    #$rv->{file} = VMS::Filespec::unixify($rv->{file}) if $^O eq 'VMS';
-
     ### break up the specification
     my @rv_path = do {
 
@@ -59,7 +55,7 @@ use_ok( 'Module::Load::Conditional' );
         
         my($vol, $path, $file) = $class->splitpath( $rv->{'file'} );
 
-        my @path = ($vol, File::Spec->splitdir( $path ), $file );
+        my @path = ($vol, $class->splitdir( $path ), $file );
 
         ### First element could be blank for some system types like VMS
         shift @path if $vol eq '';
@@ -75,7 +71,9 @@ use_ok( 'Module::Load::Conditional' );
 
 }
 
-{
+### the version may contain an _, which means perl will warn about 'not
+### numeric' -- turn off that warning here.
+{   local $^W;
     my $rv = check_install(
                         module  => 'Module::Load::Conditional',
                         version => $Module::Load::Conditional::VERSION + 1,
