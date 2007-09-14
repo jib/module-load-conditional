@@ -17,7 +17,7 @@ use strict;
 use lib qw[../lib to_load];
 use File::Spec ();
 
-use Test::More tests    => 23;
+use Test::More 'no_plan';
 
 use constant ON_VMS     => $^O eq 'VMS';
 
@@ -107,6 +107,24 @@ use_ok( 'Module::Load::Conditional' );
     ok( $rv->{version},             "   Version found" );
     is( $rv->{version}, 2,          "   Version is correct" );
 }
+
+### test beta/developer release versions
+{   my $test_ver = $Module::Load::Conditional::VERSION;
+    
+    ### strip beta tags
+    $test_ver =~ s/_\d+//g;
+    $test_ver .= '_99';
+    
+    my $rv = check_install( 
+                    module  => 'Module::Load::Conditional', 
+                    version => $test_ver,
+                );
+use Data::Dumper;
+warn Dumper $rv;
+    ok( $rv,                "Checking beta versions" );
+    ok( !$rv->{'uptodate'}, "   Beta version is higher" );
+    
+}    
 
 ### test $FIND_VERSION
 {   local $Module::Load::Conditional::FIND_VERSION = 0;
