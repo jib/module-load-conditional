@@ -11,17 +11,18 @@
 #     }
 # } 
 
+BEGIN { use FindBin }
 BEGIN { chdir 't' if -d 't' }
 
 use strict;
-use lib qw[../lib to_load];
 use File::Spec ();
-
 use Test::More 'no_plan';
 
 use constant ON_VMS     => $^O eq 'VMS';
 
-### case 1 ###
+use lib "$FindBin::Bin/../lib";
+use lib "$FindBin::Bin/to_load";
+
 use_ok( 'Module::Load::Conditional' );
 
 ### stupid stupid warnings ###
