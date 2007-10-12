@@ -9,5 +9,5 @@ t/to_load/Commented.pm
 t/to_load/InPod.pm
 t/to_load/LoadIt.pm
 t/to_load/LoadMe.pl
-t/to_load/Must/Be/Loaded.pm
+t/to_load/MustBe/Loaded.pm
 t/to_load/ToBeLoaded
