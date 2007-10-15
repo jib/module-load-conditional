@@ -1,3 +1,9 @@
+Changes for 0.22    Mon Oct 15 10:10:21 CEST 2007
+=================================================
+* Promote 0.21_01 to stable. Users who already have
+  0.20 installed do not need to upgrade. This is merely
+  a test suit portability fix for perl 5.005
+
 Changes for 0.21_01 Fri Oct 12 10:48:06 CEST 2007
 =================================================
 * Patch to make test-suite work with 5.005 weirdness
