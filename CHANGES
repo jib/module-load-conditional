@@ -1,3 +1,10 @@
+Changes for 0.24    Wed Jan  2 16:53:19 CET 2008
+=================================================
+* Readdress #29348 to make sure version comparisons
+  handle alpha versions (XX_YY type) gracefully.
+* Address #31680 to make sure $FIND_VERSION works
+  nicely with taint mode enabled.
+
 Changes for 0.22    Mon Oct 15 10:10:21 CEST 2007
 =================================================
 * Promote 0.21_01 to stable. Users who already have
