@@ -307,7 +307,7 @@ sub _parse_version {
     ### regex breaks under -T, we must modifiy it so
     ### it captures the entire expression, and eval /that/
     ### rather than $_, which is insecure.
-    my $taint_safe_str = do { $str =~ /^.*$/sm; $1 };
+    my $taint_safe_str = do { $str =~ /(^.*$)/sm; $1 };
         
     if( $str =~ /(?<!\\)([\$*])(([\w\:\']*)\bVERSION)\b.*\=/ ) {
         
