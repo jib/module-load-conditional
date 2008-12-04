@@ -20,8 +20,8 @@ use Test::More 'no_plan';
 
 use constant ON_VMS     => $^O eq 'VMS';
 
-use lib "$FindBin::Bin/../lib";
-use lib "$FindBin::Bin/to_load";
+use lib File::Spec->catdir($FindBin::Bin, qw[.. lib] );
+use lib File::Spec->catdir($FindBin::Bin, q[to_load] );
 
 use_ok( 'Module::Load::Conditional' );
 
