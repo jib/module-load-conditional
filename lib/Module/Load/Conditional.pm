@@ -116,6 +116,11 @@ to find the file:
 
 Full path to the file that contains the module
 
+=item dir
+
+Directory, or more exact the C<@INC> entry, where the module was
+loaded from.
+
 =item version
 
 The version number of the installed module - this will be C<undef> if
@@ -225,6 +230,9 @@ sub check_install {
                     next;
                 }
             }
+    
+            ### store the directory we found the file in
+            $href->{dir} = $dir;
     
             ### files need to be in unix format under vms,
             ### or they might be loaded twice
