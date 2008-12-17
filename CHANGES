@@ -1,3 +1,8 @@
+Changes for 0.28    Wed Dec 17 13:54:17 CET 2008
+=================================================
+* Add the directory the package was found in to the
+  return value of check_install()
+
 Changes for 0.26    Fri Feb 29 16:01:15 CET 2008       
 =================================================
 * Address #32817: $INC{'Module/Load/Conditional.pm'} 
