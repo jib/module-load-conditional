@@ -1,3 +1,11 @@
+Changes for 0.30    Mon Jan 19 16:25:55 CET 2009
+=================================================
+* This is a test-suite fix release only. Users of
+  0.28 need not upgrade.
+* Address #42140: 01_Module_Load_Conditional.t support 
+  VMS in UNIX compatible mode.
+* Address #42282: test fail on MSWin32  
+
 Changes for 0.28    Wed Dec 17 13:54:17 CET 2008
 =================================================
 * Add the directory the package was found in to the
