@@ -208,7 +208,7 @@ sub check_install {
                     ($fh) = $dir->[0]->($dir, $file, @{$dir}{1..$#{$dir}})
     
                 } elsif (UNIVERSAL::can($dir, 'INC')) {
-                    ($fh) = $dir->INC->($dir, $file);
+                    ($fh) = $dir->INC($file);
                 }
     
                 if (!UNIVERSAL::isa($fh, 'GLOB')) {
