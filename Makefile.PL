@@ -13,6 +13,8 @@ WriteMakefile (
                             ### tests under 5.6.2. XS version is OK
                             ### see t/02_Parse_Version.t for details
                             'version'                   => '0.69',
+                            ### We need 2.22 for is_deprecated()
+                            'Module::CoreList'          => '2.22',
                     },
     INSTALLDIRS     => ( $] >= 5.009005 ? 'perl' : 'site' ),
     AUTHOR          => 'Jos Boumans <kane[at]cpan.org>',

@@ -1,3 +1,9 @@
+Changes for 0.31_01 Fri Oct 23 09:47:12 BST 2009
+=================================================
+* Added DEPRECATED and support for determining if
+  a core module is loaded from perl lib path and
+  setting uptodate accordingly.
+
 Changes for 0.30    Mon Jan 19 16:25:55 CET 2009
 =================================================
 * This is a test-suite fix release only. Users of
