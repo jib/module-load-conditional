@@ -1,3 +1,8 @@
+Changes for 0.34    Thu Oct 29 09:22:48 GMT 2009
+=================================================
+* Remove DOS line endings from test files RT#50926
+  reported by Steve Hay
+
 Changes for 0.32    Fri Oct 23 21:56:11 BST 2009
 =================================================
 * Version bump
