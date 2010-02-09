@@ -1,3 +1,8 @@
+Changes for 0.36    Tue Feb  9 14:16:21 GMT 2010
+=================================================
+* Apply patch from Pavel Shaydo RT #53546 to improve
+  the performance of _parse_version()
+
 Changes for 0.34    Thu Oct 29 09:22:48 GMT 2009
 =================================================
 * Remove DOS line endings from test files RT#50926
