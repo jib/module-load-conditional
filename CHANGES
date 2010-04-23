@@ -1,3 +1,9 @@
+Changes for 0.38    Fri Apr 23 15:52:38 BST 2010
+=================================================
+* New release of version raises exceptions on
+  parse errors. Use eval to guard ourselves 
+  against this.
+
 Changes for 0.36    Tue Feb  9 14:16:21 GMT 2010
 =================================================
 * Apply patch from Pavel Shaydo RT #53546 to improve
