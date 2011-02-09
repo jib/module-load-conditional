@@ -1,3 +1,8 @@
+Changes for 0.42    Wed Feb  9 15:27:14 GMT 2011
+=================================================
+* Apply patch from Phillip Moore RT #60916, which
+  fixes an edge-case with obj/ref @INC entries.
+
 Changes for 0.40    Fri Jan  7 21:45:01 GMT 2011
 =================================================
 * Apply blead patch from Peter Acklam
