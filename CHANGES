@@ -1,3 +1,7 @@
+Changes for 0.44    Wed Feb  9 21:48:42 GMT 2011
+=================================================
+* Apply podchecker patch from Michael Stevens RT #65601
+
 Changes for 0.42    Wed Feb  9 15:27:14 GMT 2011
 =================================================
 * Apply patch from Phillip Moore RT #60916, which
