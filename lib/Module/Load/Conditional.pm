@@ -204,6 +204,8 @@ sub check_install {
             if ( ref $dir ) {
                 ### @INC hook -- we invoke it and get the filehandle back
                 ### this is actually documented behaviour as of 5.8 ;)
+
+                my $existed_in_inc = $INC{$file_inc};
     
                 if (UNIVERSAL::isa($dir, 'CODE')) {
                     ($fh) = $dir->($dir, $file);
@@ -222,6 +224,8 @@ sub check_install {
                 }
     
                 $filename = $INC{$file_inc} || $file;
+
+                delete $INC{$file_inc} if not $existed_in_inc;
     
             } else {
                 $filename = File::Spec->catfile($dir, $file);
