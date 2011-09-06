@@ -332,7 +332,7 @@ sub check_install {
 sub _parse_version {
     my $self    = shift;
     my $str     = shift or return;
-    my $verbose = shift or 0;
+    my $verbose = shift || 0;
 
     ### skip lines which doesn't contain VERSION
     return unless $str =~ /VERSION/;
