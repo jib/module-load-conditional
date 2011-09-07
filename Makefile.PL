@@ -18,7 +18,7 @@ WriteMakefile1(
                     },
     INSTALLDIRS     => ( $] >= 5.009005 ? 'perl' : 'site' ),
     AUTHOR          => 'Jos Boumans <kane[at]cpan.org>',
-    ABSTRACT        => 'Looking up module information / loading at runtime'
+    ABSTRACT        => 'Looking up module information / loading at runtime',
     LICENSE => 'perl',
     META_MERGE => {
         resources => {

@@ -1,3 +1,7 @@
+Changes for 0.46    Wed Sep  7 23:57:03 BST 2011
+=================================================
+* Use || instead of "or" (perl#78708) (chorny)
+
 Changes for 0.44    Wed Feb  9 21:48:42 GMT 2011
 =================================================
 * Apply podchecker patch from Michael Stevens RT #65601
