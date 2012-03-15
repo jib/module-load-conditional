@@ -1,4 +1,4 @@
-This is the README file for Module::Load::Conditional -- a way to 
+This is the README file for Module::Load::Conditional -- a way to
 conditionally load and query modules.
 
 Please type "perldoc Module::Load::Conditional" after installation to
@@ -9,18 +9,18 @@ see the module usage information.
 * Description
 
 Module::Load::Conditional
-    
-    Allows you to query the state of modules on your system. It can 
-    tell you if you have certain modules installed without attempting 
+
+    Allows you to query the state of modules on your system. It can
+    tell you if you have certain modules installed without attempting
     to C<use> them and can do smart loading of modules.
-    Also it can tell you what *other* modules a certain module 
+    Also it can tell you what *other* modules a certain module
     requires.
 
 #####################################################################
 
 * Installation
 
-Module::Load::Conditional uses the standard perl module install 
+Module::Load::Conditional uses the standard perl module install
 process:
 
 perl Makefile.PL
