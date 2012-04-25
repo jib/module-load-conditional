@@ -252,7 +252,8 @@ sub check_install {
             if( $FIND_VERSION ) {
 
                 my $in_pod = 0;
-                while ( my $line = <$fh> ) {
+                my $line;
+                while ( $line = <$fh> ) {
 
                     ### #24062: "Problem with CPANPLUS 0.076 misidentifying
                     ### versions after installing Text::NSP 1.03" where a
