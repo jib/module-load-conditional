@@ -263,6 +263,9 @@ sub check_install {
                     }
                     next if $in_pod;
 
+                    ### skip lines which doesn't contain VERSION
+                    next unless $line =~ /VERSION/;
+
                     ### try to find a version declaration in this string.
                     my $ver = __PACKAGE__->_parse_version( $line );
 
@@ -332,9 +335,6 @@ sub _parse_version {
     my $self    = shift;
     my $str     = shift or return;
     my $verbose = shift || 0;
-
-    ### skip lines which doesn't contain VERSION
-    return unless $str =~ /VERSION/;
 
     ### skip commented out lines, they won't eval to anything.
     return if $str =~ /^\s*#/;
