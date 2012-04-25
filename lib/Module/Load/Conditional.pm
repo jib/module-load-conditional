@@ -254,14 +254,13 @@ sub check_install {
                 my $in_pod = 0;
                 while ( my $line = <$fh> ) {
 
-                    ### stolen from EU::MM_Unix->parse_version to address
                     ### #24062: "Problem with CPANPLUS 0.076 misidentifying
                     ### versions after installing Text::NSP 1.03" where a
                     ### VERSION mentioned in the POD was found before
                     ### the real $VERSION declaration.
-                    $in_pod = $line =~ /^=(?!cut)/  ? 1 :
-                              $line =~ /^=cut/      ? 0 :
-                              $in_pod;
+                    if( $line =~ /^=(.{0,3})/ ) {
+                        $in_pod = $1 ne 'cut';
+                    }
                     next if $in_pod;
 
                     ### try to find a version declaration in this string.
