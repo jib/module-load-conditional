@@ -1,3 +1,7 @@
+Changes for 0.50    Fri Apr 27 22:22:13 BST 2012
+=================================================
+* Speed enhancements with thanks to Vincent Pit
+
 Changes for 0.48    Thu Mar 15 13:55:50 GMT 2012
 =================================================
 * Wrap $^X in "" to foil paths with spaces
