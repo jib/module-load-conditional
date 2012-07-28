@@ -319,7 +319,7 @@ sub check_install {
         };
     }
 
-    if ( $DEPRECATED and version->new($]) >= version->new('5.011') ) {
+    if ( $DEPRECATED and "$]" >= 5.011 ) {
         require Module::CoreList;
         require Config;
 
