@@ -5,6 +5,8 @@ MANIFEST			This list of files
 README
 t/01_Module_Load_Conditional.t
 t/02_Parse_Version.t
+t/test_lib/a/X.pm
+t/test_lib/b/X.pm
 t/to_load/Commented.pm
 t/to_load/InPod.pm
 t/to_load/LoadIt.pm

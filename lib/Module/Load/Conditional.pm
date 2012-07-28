@@ -248,33 +248,33 @@ sub check_install {
                 ? VMS::Filespec::unixify( $filename )
                 : $filename;
 
-            ### user wants us to find the version from files
-            if( $FIND_VERSION ) {
+            ### if we don't need the version, we're done
+            last DIR unless $FIND_VERSION;
 
-                my $in_pod = 0;
-                my $line;
-                while ( $line = <$fh> ) {
+            ### otherwise, the user wants us to find the version from files
+            my $in_pod = 0;
+            my $line;
+            while ( $line = <$fh> ) {
 
-                    ### #24062: "Problem with CPANPLUS 0.076 misidentifying
-                    ### versions after installing Text::NSP 1.03" where a
-                    ### VERSION mentioned in the POD was found before
-                    ### the real $VERSION declaration.
-                    if( $line =~ /^=(.{0,3})/ ) {
-                        $in_pod = $1 ne 'cut';
-                    }
-                    next if $in_pod;
+                ### #24062: "Problem with CPANPLUS 0.076 misidentifying
+                ### versions after installing Text::NSP 1.03" where a
+                ### VERSION mentioned in the POD was found before
+                ### the real $VERSION declaration.
+                if( $line =~ /^=(.{0,3})/ ) {
+                    $in_pod = $1 ne 'cut';
+                }
+                next if $in_pod;
 
-                    ### skip lines which doesn't contain VERSION
-                    next unless $line =~ /VERSION/;
+                ### skip lines which doesn't contain VERSION
+                next unless $line =~ /VERSION/;
 
-                    ### try to find a version declaration in this string.
-                    my $ver = __PACKAGE__->_parse_version( $line );
+                ### try to find a version declaration in this string.
+                my $ver = __PACKAGE__->_parse_version( $line );
 
-                    if( defined $ver ) {
-                        $href->{version} = $ver;
+                if( defined $ver ) {
+                    $href->{version} = $ver;
 
-                        last DIR;
-                    }
+                    last DIR;
                 }
             }
         }
