@@ -18,7 +18,7 @@ WriteMakefile1(
                             ### We need 1.000_005 for new_from_handle()
                             'Module::Metadata'          => '1.000005',
                     },
-    INSTALLDIRS     => ( $] >= 5.009005 ? 'perl' : 'site' ),
+    INSTALLDIRS     => ( $] >= 5.009005 and $] < 5.012 ? 'perl' : 'site' ),
     AUTHOR          => 'Jos Boumans <kane[at]cpan.org>',
     ABSTRACT        => 'Looking up module information / loading at runtime',
     LICENSE => 'perl',

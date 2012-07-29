@@ -1,3 +1,8 @@
+Changes for 0.52    Sun Jul 29 10:06:44 BST 2012
+=================================================
+* Various enhancements, including now uses
+  Module::Metadata (vpit)
+
 Changes for 0.50    Fri Apr 27 22:22:13 BST 2012
 =================================================
 * Speed enhancements with thanks to Vincent Pit
