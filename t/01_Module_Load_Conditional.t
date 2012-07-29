@@ -132,6 +132,21 @@ use_ok( 'Module::Load::Conditional' );
     is( $rv->{version}, 2,          "   Version is correct" );
 }
 
+### test that no package statement means $VERSION is $main::VERSION
+{
+    my $rv = check_install( module => 'NotMain' );
+    ok( $rv,                   'Testing $VERSION without package' );
+    is( $rv->{version}, undef, "   No version info returned" );
+}
+
+### test that the right $VERSION is picked when there are several packages
+{
+    my $rv = check_install( module => 'NotX' );
+    ok( $rv,               'Testing $VERSION with many packages' );
+    ok( $rv->{version},    "   Version found" );
+    is( $rv->{version}, 3, "   Version is correct" );
+}
+
 ### test beta/developer release versions
 {   my $test_ver = $Module::Load::Conditional::VERSION;
 

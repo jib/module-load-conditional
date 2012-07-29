@@ -11,6 +11,8 @@ use File::Spec  ();
 use FileHandle  ();
 use version;
 
+use Module::Metadata ();
+
 use constant ON_VMS  => $^O eq 'VMS';
 
 BEGIN {
@@ -252,30 +254,13 @@ sub check_install {
             last DIR unless $FIND_VERSION;
 
             ### otherwise, the user wants us to find the version from files
-            my $in_pod = 0;
-            my $line;
-            while ( $line = <$fh> ) {
+            my $mod_info = Module::Metadata->new_from_handle( $fh, $filename );
+            my $ver      = $mod_info->version( $args->{module} );
 
-                ### #24062: "Problem with CPANPLUS 0.076 misidentifying
-                ### versions after installing Text::NSP 1.03" where a
-                ### VERSION mentioned in the POD was found before
-                ### the real $VERSION declaration.
-                if( $line =~ /^=(.{0,3})/ ) {
-                    $in_pod = $1 ne 'cut';
-                }
-                next if $in_pod;
+            if( defined $ver ) {
+                $href->{version} = $ver;
 
-                ### skip lines which doesn't contain VERSION
-                next unless $line =~ /VERSION/;
-
-                ### try to find a version declaration in this string.
-                my $ver = __PACKAGE__->_parse_version( $line );
-
-                if( defined $ver ) {
-                    $href->{version} = $ver;
-
-                    last DIR;
-                }
+                last DIR;
             }
         }
     }
@@ -330,64 +315,6 @@ sub check_install {
     }
 
     return $href;
-}
-
-sub _parse_version {
-    my $self    = shift;
-    my $str     = shift or return;
-    my $verbose = shift || 0;
-
-    ### skip commented out lines, they won't eval to anything.
-    return if $str =~ /^\s*#/;
-
-    ### the following regexp & eval statement comes from the
-    ### ExtUtils::MakeMaker source (EU::MM_Unix->parse_version)
-    ### Following #18892, which tells us the original
-    ### regex breaks under -T, we must modify it so
-    ### it captures the entire expression, and eval /that/
-    ### rather than $_, which is insecure.
-    my $taint_safe_str = do { $str =~ /(^.*$)/sm; $1 };
-
-    if( $str =~ /(?<!\\)([\$*])(([\w\:\']*)\bVERSION)\b.*\=/ ) {
-
-        print "Evaluating: $str\n" if $verbose;
-
-        ### this creates a string to be eval'd, like:
-        # package Module::Load::Conditional::_version;
-        # no strict;
-        #
-        # local $VERSION;
-        # $VERSION=undef; do {
-        #     use version; $VERSION = qv('0.0.3');
-        # }; $VERSION
-
-        my $eval = qq{
-            package Module::Load::Conditional::_version;
-            no strict;
-
-            local $1$2;
-            \$$2=undef; do {
-                $taint_safe_str
-            }; \$$2
-        };
-
-        print "Evaltext: $eval\n" if $verbose;
-
-        my $result = do {
-            local $^W = 0;
-            eval($eval);
-        };
-
-
-        my $rv = defined $result ? $result : '0.0';
-
-        print( $@ ? "Error: $@\n" : "Result: $rv\n" ) if $verbose;
-
-        return $rv;
-    }
-
-    ### unable to find a version in this string
-    return;
 }
 
 =head2 $bool = can_load( modules => { NAME => VERSION [,NAME => VERSION] }, [verbose => BOOL, nocache => BOOL] )
