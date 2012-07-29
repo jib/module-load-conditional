@@ -15,6 +15,8 @@ WriteMakefile1(
                             'version'                   => '0.69',
                             ### We need 2.22 for is_deprecated()
                             'Module::CoreList'          => '2.22',
+                            ### We need 1.000_005 for new_from_handle()
+                            'Module::Metadata'          => '1.000005',
                     },
     INSTALLDIRS     => ( $] >= 5.009005 ? 'perl' : 'site' ),
     AUTHOR          => 'Jos Boumans <kane[at]cpan.org>',
