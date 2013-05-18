@@ -195,7 +195,7 @@ sub check_install {
         }
     }
 
-    ### we didnt find the filename yet by looking in %INC,
+    ### we didn't find the filename yet by looking in %INC,
     ### so scan the dirs
     unless( $filename ) {
 
