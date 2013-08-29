@@ -53,4 +53,3 @@ sub WriteMakefile1 {  #Written by Alexandr Ciornii, version 0.21. Added by eumm-
 
     WriteMakefile(%params);
 }
-
