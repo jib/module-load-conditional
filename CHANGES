@@ -1,3 +1,7 @@
+Changes for 0.56    Thu Aug 29 21:29:22 BST 2013
+=================================================
+* RT#83728 make requires() more robust
+
 Changes for 0.54    Sun Aug 12 09:10:13 BST 2012
 =================================================
 * VMS test fixes from Craig Berry
