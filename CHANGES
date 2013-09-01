@@ -1,3 +1,8 @@
+Changes for 0.58    Sun Sep  1 11:21:59 BST 2013
+=================================================
+* RT#83728 make quoting work portably and remove
+  prototypes from one-liner in requires()
+
 Changes for 0.56    Thu Aug 29 21:29:22 BST 2013
 =================================================
 * RT#83728 make requires() more robust
