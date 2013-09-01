@@ -13,7 +13,9 @@ use version;
 
 use Module::Metadata ();
 
-use constant ON_VMS  => $^O eq 'VMS';
+use constant ON_VMS   => $^O eq 'VMS';
+use constant ON_WIN32 => $^O eq 'MSWin32' ? 1 : 0;
+use constant QUOTE    => do { ON_WIN32 ? q["] : q['] };
 
 BEGIN {
     use vars        qw[ $VERSION @ISA $VERBOSE $CACHE @EXPORT_OK $DEPRECATED
@@ -495,8 +497,8 @@ sub requires {
     }
 
     my $lib = join " ", map { qq["-I$_"] } @INC;
-    my $oneliner = 'sub foo(_){q[BONG=].shift} print(join(qq[\n],map foo,keys(%INC)),qq[\n])';
-    my $cmd = qq["$^X" $lib -M$who -e"$oneliner"];
+    my $oneliner = 'print(join(qq[\n],map{qq[BONG=$_]}keys(%INC)),qq[\n])';
+    my $cmd = join '', qq["$^X" $lib -M$who -e], QUOTE, $oneliner, QUOTE;
 
     return  sort
                 grep { !/^$who$/  }
