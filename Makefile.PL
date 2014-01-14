@@ -5,9 +5,9 @@ WriteMakefile1(
     NAME            => 'Module::Load::Conditional',
     VERSION_FROM    => 'lib/Module/Load/Conditional.pm', # finds $VERSION
     dist            => { COMPRESS => 'gzip -9f', SUFFIX => 'gz' },
-    PREREQ_PM       => {    'Test::More'                => 0,
-                            'Params::Check'             => 0,
-                            'Module::Load'              => '0.11',
+    BUILD_REQUIRES  => {    'Test::More'                => 0,   },
+    PREREQ_PM       => {    'Params::Check'             => 0,
+                            'Module::Load'              => '0.28',
                             'Locale::Maketext::Simple'  => 0,
                             ### XXX version.pm 0.69 pure perl fails
                             ### tests under 5.6.2. XS version is OK
@@ -27,8 +27,6 @@ WriteMakefile1(
             repository => 'https://github.com/jib/module-load-conditional',
         },
     },
-    #BUILD_REQUIRES => {
-    #},
 );
 
 sub WriteMakefile1 {  #Written by Alexandr Ciornii, version 0.21. Added by eumm-upgrade.
