@@ -6,6 +6,8 @@ README
 t/01_Module_Load_Conditional.t
 t/test_lib/a/X.pm
 t/test_lib/b/X.pm
+t/to_load/AutoLoad.pm
+t/to_load/NotAutoLoad.pm
 t/to_load/Commented.pm
 t/to_load/InPod.pm
 t/to_load/LoadIt.pm
