@@ -1,3 +1,7 @@
+0.66    Wed Jul 27 08:22:53 BST 2016
+
+* Add FORCE_SAFE_INC option to fix CVE-2016-1238
+
 0.64    Sat Jan 17 13:33:57 GMT 2015
 
 * Resolve an edge-case with DEPRECATED
