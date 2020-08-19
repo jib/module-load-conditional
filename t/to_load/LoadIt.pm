@@ -1,4 +1,5 @@
 package LoadIt;
+use strict;
 
 our $VERSION = 1;
 
