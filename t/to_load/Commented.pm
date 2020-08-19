@@ -1,4 +1,5 @@
 package Commented;
+use strict;
 
 our $VERSION;
 # $VERSION = 1;
